@@ -41,8 +41,10 @@ server.get('/api/users/:id', (req, res) => {
     const user = users.find(user => user.id == id)
     if(user){
         res.status(200).json(user);
-    }else {
+    }else if(!user){
         res.status(404).json({ message: "The user with the specified ID does not exist." })
+    }else{
+        res.status(500).json({ errorMessage: "errorMessage: The users information could not be retrieved."});
     }
 
 })
